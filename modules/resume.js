@@ -1,0 +1,160 @@
+const mongoose = require("mongoose");
+const env = require('dotenv');
+
+env.config();
+
+mongoose.connect(process.env.DB_URL,
+    {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    }
+).then(() => {
+    console.log("Database Connected");
+});
+
+var resumeSchema = new mongoose.Schema({
+    FullName:{
+        type:String,
+        required:true,
+        min:3,
+        max:30,
+        trim:true
+    },
+    Designation:{
+        type:String,
+        required:true,
+        min:5,
+        max:50,
+        trim:true
+    },
+    Address:{
+        type:String,
+        required:true,
+        min:10,
+        max:120,
+        trim:true
+    },
+    Contact:{
+        type:String,
+        required:true
+    },
+    Email:{
+        type:String,
+        required:true
+    },
+    SkillSets:[
+        {
+            Skill:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    Interests:[
+        {
+            interest:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    PersonalStrengths:[
+        {
+            strength:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    Social:[
+        {
+            name:{
+                type:String,
+                required:true
+            },
+            mail:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    About:{
+        type:String,
+        required:true
+    },
+    Internship:[
+        {
+            CompanyName:{
+                type:String,
+                required:true
+            },
+            Description:{
+                type:String,
+                required:true
+            },
+            From:{
+                type:String,
+                required:true
+            },
+            To:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    Education:[
+        {
+            InstituteName:{
+                type:String,
+                required:true
+            },
+            Course:{
+                type:String,
+                required:true
+            },
+            Score:{
+               type:String,
+               required:true 
+            },
+            Duration:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    Projects:[
+        {
+            ProjectName:{
+                type:String,
+                required:true
+            },
+            ProjectType:{
+                type:String,
+                required:true
+            },
+            TechnologiesUsed:{
+                type:String
+            },
+            ProjectDescription:{
+                type:String
+            },
+            GithubURL:{
+                type:String
+            }
+        }
+    ],
+    Achievements:[
+        {
+            Achieve:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    profile:{type:String}
+},{timestamps:true});
+
+var resumeModel = mongoose.model('resume',resumeSchema);
+
+module.exports = resumeModel;
