@@ -3,7 +3,7 @@ const env = require('dotenv');
 
 env.config();
 
-mongoose.connect(process.env.DB_URL,
+mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.fp08a.mongodb.net/${process.env.MONGODB_DATABASE}`,
     {
         useNewUrlParser: true,
         useCreateIndex: true,
