@@ -23,13 +23,13 @@ exports.addProject = (req,res)=>{
 
     if(frontend.length > 0){
         req.body.frontend = frontend.map((frontendPic,index)=> ({
-            img: `public/${frontendPic.filename}`
+            img: `${frontendPic.filename}`
         }))
     }
 
     if(admindashboard.length > 0){
         req.body.admindashboard = admindashboard.map((admindashboardPic,index)=> ({
-            img: `public/${admindashboardPic.filename}`
+            img: `${admindashboardPic.filename}`
         }))
     }
 

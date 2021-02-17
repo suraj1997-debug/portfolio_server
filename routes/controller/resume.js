@@ -73,7 +73,7 @@ exports.getResume = (req,res) =>{
 exports.addProfile =(req,res)=>{
 
     var id= req.body._id;
-    var profilepic =   'public/' + req.file.filename;
+    var profilepic =    req.file.filename;
     resumeModule.findById(id,(err,data)=>{
 
         data.profile = profilepic?profilepic:data.profile;
