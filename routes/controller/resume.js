@@ -82,8 +82,7 @@ exports.addProfile =(req,res)=>{
     .then(doc=>{
         res.status(201).json({
             message:"Profile image updated Successfully!!",
-            profile:doc,
-            file:req.file
+            profile:doc
         })
     })
     .catch(err=>{

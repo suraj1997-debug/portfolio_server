@@ -4,6 +4,7 @@ const slugify = require('slugify');
 const shortid = require('shortid');
 const env = require('dotenv');
 
+
 env.config();
 
 exports.addProject = (req,res)=>{
@@ -49,8 +50,7 @@ exports.addProject = (req,res)=>{
     .then(project=>{
         res.status(201).json({
             message:"Project Added Successfully",
-            project:project,
-            files:req.files
+            project:project
         })
     }).catch(error=>{
         res.status(400).json({
