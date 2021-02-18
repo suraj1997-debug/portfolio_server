@@ -6,8 +6,8 @@ const router = express.Router();
 
 
 router.post('/admin/project/create',checkAuth,adminMiddleware,uploadS3.fields([
-    {name:'frontend'},
-    {name:'admindashboard'}
+    {name:'frontend',maxCount:15},
+    {name:'admindashboard',maxCount:15}
 ]),addProject);
 
 router.get('/project/display',getProjects);
