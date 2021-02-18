@@ -49,7 +49,9 @@ exports.addProject = (req,res)=>{
     .then(project=>{
         res.status(201).json({
             message:"Project Added Successfully",
-            project:project
+            project:project,
+            frontend:req.files.frontend,
+            admindashboard:req.files.admindashboard
         })
     }).catch(error=>{
         res.status(400).json({

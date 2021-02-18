@@ -1,5 +1,9 @@
 const jwt = require('jsonwebtoken');
 const env = require('dotenv');
+const multer  = require('multer');
+const aws = require("aws-sdk");
+const multerS3 = require('multer-s3');
+const shortid = require('shortid');
 
 env.config();
 
@@ -38,3 +42,33 @@ exports.userMiddleware=(req,res,next)=>{
     }
     next();
 }
+
+const storage = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null,'./public/uploads')
+    },
+    filename: function(req,file,cb){
+        cb(null,shortid.generate() + '-' + file.originalname);
+    }
+})
+
+const s3 = new aws.S3({
+    accessKeyId: 'AKIAIVXXVTGUWKBDXKWQ',
+    secretAccessKey: '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'
+})
+
+exports.upload = multer({ storage })
+
+exports.uploadS3 =multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'dev-suraj-app',
+        acl: 'public-read',
+        metadata: function (req, file, cb) {
+          cb(null, {fieldName: file.fieldname});
+        },
+        key: function (req, file, cb) {
+          cb(null,shortid.generate() + '-' + file.originalname)
+        }
+      })
+})
