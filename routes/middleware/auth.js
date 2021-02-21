@@ -27,7 +27,7 @@ exports.upload = multer({ storage })
 exports.uploadS3 =multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'dev-suraj',
+        bucket: process.env.MY_BUCKET,
         acl: 'public-read',
         metadata: function (req, file, cb) {
           cb(null, {fieldName: file.fieldname});

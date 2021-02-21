@@ -24,13 +24,13 @@ exports.addProject = (req,res)=>{
 
     if(frontend.length > 0){
         req.body.frontend = frontend.map((frontendPic,index)=> ({
-            img: `${frontendPic.filename}`
+            img: `${frontendPic.location}`
         }))
     }
 
     if(admindashboard.length > 0){
         req.body.admindashboard = admindashboard.map((admindashboardPic,index)=> ({
-            img: `${admindashboardPic.filename}`
+            img: `${admindashboardPic.location}`
         }))
     }
 
@@ -50,7 +50,8 @@ exports.addProject = (req,res)=>{
     .then(project=>{
         res.status(201).json({
             message:"Project Added Successfully",
-            project:project
+            project:project,
+            files:req.files
         })
     }).catch(error=>{
         res.status(400).json({

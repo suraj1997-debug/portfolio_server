@@ -73,7 +73,7 @@ exports.getResume = (req,res) =>{
 exports.addProfile =(req,res)=>{
 
     var id= req.body._id;
-    var profilepic =    req.file.filename;
+    var profilepic =  req.file.location;
     resumeModule.findById(id,(err,data)=>{
 
         data.profile = profilepic?profilepic:data.profile;
@@ -82,7 +82,8 @@ exports.addProfile =(req,res)=>{
     .then(doc=>{
         res.status(201).json({
             message:"Profile image updated Successfully!!",
-            profile:doc
+            profile:doc,
+            file:req.file
         })
     })
     .catch(err=>{
