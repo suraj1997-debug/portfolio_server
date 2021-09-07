@@ -152,7 +152,11 @@ var resumeSchema = new mongoose.Schema({
             }
         }
     ],
-    profile:{type:String}
+    profile:{type:String},
+    pdf:{
+        type:String,
+        default:''
+    }
 },{timestamps:true});
 
 var resumeModel = mongoose.model('resume',resumeSchema);
