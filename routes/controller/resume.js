@@ -98,117 +98,117 @@ exports.addProfile =(req,res)=>{
 }
 
 exports.generateResumePdf = (req,res) =>{
-    console.log('resume',resume)
-//     const {resume } = req.body;
-//     const id = objectId(resume._id);
+ 
+    const {resume } = req.body;
+    const id = objectId(resume._id);
 
-//     var options = {
-//         format: "A4",
-//         orientation: "portrait",
-//         border: "8mm",
-//         color: "black",
-//         footer: {
-//             height: "2mm",
-//         },
-//     };
+    var options = {
+        format: "A4",
+        orientation: "portrait",
+        border: "8mm",
+        color: "black",
+        footer: {
+            height: "2mm",
+        },
+    };
 
-//     // let pdfLogo = `${process.env.URL}/backend/public/images/PRATC-logo.png`;
-//     // let pdfLogo =
-//     //   path.join(__dirname, '..', '/public') + `/images/PRATC-logo.png`;
-//     // let appStore = 'https://localhost:8443/images/appstore.png';
+    // let pdfLogo = `${process.env.URL}/backend/public/images/PRATC-logo.png`;
+    // let pdfLogo =
+    //   path.join(__dirname, '..', '/public') + `/images/PRATC-logo.png`;
+    // let appStore = 'https://localhost:8443/images/appstore.png';
 
-//     //console.log(pdfLogo);
+    //console.log(pdfLogo);
 
-//     var fileName = "resumeform" + "-" + new Date().getTime();
-//     var html = fs.readFileSync(__dirname + "/resume.html", "utf8");
-//     var filePath = "pdf/" + fileName + ".pdf";
+    var fileName = "resumeform" + "-" + new Date().getTime();
+    var html = fs.readFileSync(__dirname + "/resume.html", "utf8");
+    var filePath = "pdf/" + fileName + ".pdf";
 
-//     // let fdate,tdate;
+    // let fdate,tdate;
 
-//     // fdate = req.body.fromDate.split('-');
-//     // tdate = req.body.toDate.split('-');
+    // fdate = req.body.fromDate.split('-');
+    // tdate = req.body.toDate.split('-');
 
-//     var document = {
-//         html: html,
-//         data: resume,
-//         path: "./public/uploads/" + filePath,
-//     };
-//     resumeModule.findById({_id:id})
-//     .then(resumepdf=>{
-//         if(resumepdf.pdf === ''){
-//     pdf.create(document, options).then(() => {
-//         resumeModule.findByIdAndUpdate({_id:id},{pdf:fileName})
-//         .then((p)=>{
-//         return res.status(201).json({
-//             status: true,
-//             message: "pdf generated successfully",
-//             fileName: fileName,
-//         });
+    var document = {
+        html: html,
+        data: resume,
+        path: "./public/uploads/" + filePath,
+    };
+    resumeModule.findById({_id:id})
+    .then(resumepdf=>{
+        if(resumepdf.pdf === ''){
+    pdf.create(document, options).then(() => {
+        resumeModule.findByIdAndUpdate({_id:id},{pdf:fileName})
+        .then((p)=>{
+        return res.status(201).json({
+            status: true,
+            message: "pdf generated successfully",
+            fileName: fileName,
+        });
       
-//     })
-//     .catch(err => {
-//         console.log('err', err)
-//         return res.status(400).json({
-//             success: false,
-//             errorMessage: 'Something went wrong',
-//             errorLog: err
-//         })
-//     })
+    })
+    .catch(err => {
+        console.log('err', err)
+        return res.status(400).json({
+            success: false,
+            errorMessage: 'Something went wrong',
+            errorLog: err
+        })
+    })
     
-// })
-//     .catch(err => {
-//         console.log('err', err)
-//         return res.status(400).json({
-//             success: false,
-//             errorMessage: 'Something went wrong',
-//             errorLog: err
-//         })
-//     })
-// }
-// else{
-//     fs.unlink("./uploads/pdf/"+resumepdf.pdf+ ".pdf", (err) => {
-//         if (err) {
-//             console.log("failed to delete local image:"+err);
-//         } else {
-//             pdf.create(document, options).then(() => {
-//                 resumeModule.findByIdAndUpdate({_id:id},{pdf:fileName})
-//                 .then((p)=>{
-//                 return res.status(201).json({
-//                     status: true,
-//                     message: "pdf generated successfully",
-//                     fileName: fileName,
-//                 });
-//             })
-//             .catch(err => {
-//                 console.log('err', err)
-//                 return res.status(400).json({
-//                     success: false,
-//                     errorMessage: 'Something went wrong',
-//                     errorLog: err
-//                 })
-//             })
+})
+    .catch(err => {
+        console.log('err', err)
+        return res.status(400).json({
+            success: false,
+            errorMessage: 'Something went wrong',
+            errorLog: err
+        })
+    })
+}
+else{
+    fs.unlink("./public/uploads/pdf/"+resumepdf.pdf+ ".pdf", (err) => {
+        if (err) {
+            console.log("failed to delete local image:"+err);
+        } else {
+            pdf.create(document, options).then(() => {
+                resumeModule.findByIdAndUpdate({_id:id},{pdf:fileName})
+                .then((p)=>{
+                return res.status(201).json({
+                    status: true,
+                    message: "pdf generated successfully",
+                    fileName: fileName,
+                });
+            })
+            .catch(err => {
+                console.log('err', err)
+                return res.status(400).json({
+                    success: false,
+                    errorMessage: 'Something went wrong',
+                    errorLog: err
+                })
+            })
             
-//         })
-//             .catch(err => {
-//                 console.log('err', err)
-//                 return res.status(400).json({
-//                     success: false,
-//                     errorMessage: 'Something went wrong',
-//                     errorLog: err
-//                 })
-//             })
-//         }
-// })
-// }
-// })
-// .catch(err => {
-//     console.log('err', err)
-//     return res.status(400).json({
-//         success: false,
-//         errorMessage: 'Something went wrong',
-//         errorLog: err
-//     })
-// })
+        })
+            .catch(err => {
+                console.log('err', err)
+                return res.status(400).json({
+                    success: false,
+                    errorMessage: 'Something went wrong',
+                    errorLog: err
+                })
+            })
+        }
+})
+}
+})
+.catch(err => {
+    console.log('err', err)
+    return res.status(400).json({
+        success: false,
+        errorMessage: 'Something went wrong',
+        errorLog: err
+    })
+})
 }
 
 exports.downloadResumePdf = (req,res) =>{
