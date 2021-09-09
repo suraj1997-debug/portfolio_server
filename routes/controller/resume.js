@@ -131,7 +131,7 @@ exports.generateResumePdf = (req,res) =>{
     var document = {
         html: html,
         data: resume,
-        path: "./public/uploads/" + filePath,
+        path: "./public/" + filePath,
     };
     resumeModule.findById({_id:id})
     .then(resumepdf=>{
@@ -166,7 +166,7 @@ exports.generateResumePdf = (req,res) =>{
     })
 }
 else{
-    fs.unlink("./public/uploads/pdf/"+resumepdf.pdf+ ".pdf", (err) => {
+    fs.unlink("./public/pdf/"+resumepdf.pdf+ ".pdf", (err) => {
         if (err) {
             console.log("failed to delete local image:"+err);
         } else {
