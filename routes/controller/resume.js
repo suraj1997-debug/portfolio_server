@@ -212,5 +212,5 @@ else{
 }
 
 exports.downloadResumePdf = (req,res) =>{
-    return res.download(`./public/pdf/${req.params.filename}.pdf`)
+    return res.download(`./public/uploads/pdf/${req.params.filename}.pdf`)
 }
