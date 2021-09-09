@@ -212,5 +212,5 @@ else{
 }
 
 exports.downloadResumePdf = (req,res) =>{
-    return res.download(`https://portfolio-backend-rest-server.herokuapp.com/public/pdf/${req.params.filename}.pdf`)
+    return res.download(`./public/pdf/${req.params.filename}.pdf`)
 }
