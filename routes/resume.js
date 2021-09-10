@@ -13,7 +13,7 @@ router.post("/get-user-profile",checkAuth,adminMiddleware,uploadS3.single('profi
 
 //pdf create apis
 //generate resume pdf (new api)
-router.post('/generateResumePdf',generateResumePdf);
+// router.post('/generateResumePdf',generateResumePdf);
 
 //download resume pdf (new api)
 router.get('/downloadResumePdf/:filename',downloadResumePdf);
