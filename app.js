@@ -13,6 +13,17 @@ var projectRouter = require('./routes/project');
 var resumeRouter = require('./routes/resume');
 
 var app = express();
+app.use(cors());
+
+// const { createProxyMiddleware } = require('http-proxy-middleware');
+// app.use('/api', createProxyMiddleware({ 
+//     target: 'http://localhost:5000/', //original url
+//     changeOrigin: true, 
+//     //secure: false,
+//     onProxyRes: function (proxyRes, req, res) {
+//        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+//     }
+// }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/public',express.static(path.join(__dirname, '/public/uploads')));
 
+
 // app.use(function(req,res,next){
 //   res.header("Access-Control-Allow-Origin","*");
 //   res.header(
@@ -34,17 +46,17 @@ app.use('/public',express.static(path.join(__dirname, '/public/uploads')));
 //   next();
 // });
 
-app.use(cors());
 
-app.use(function(req,res,next){
-  res.header("Access-Control-Allow-Origin","*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept,Authorization"
-  );
-  res.header('Access-Control-Allow-Methods','GET,PUT,PATCH,POST,DELETE,OPTIONS');
-  next();
-});
+
+// app.use(function(req,res,next){
+//   res.header("Access-Control-Allow-Origin","*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin,X-Requested-With,Content-Type,Accept,Authorization"
+//   );
+//   res.header('Access-Control-Allow-Methods','GET,PUT,PATCH,POST,DELETE,OPTIONS');
+//   next();
+// });
 
 app.use('/api', userRouter);
 app.use('/api',adminRouter);

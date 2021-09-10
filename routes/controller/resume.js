@@ -131,7 +131,7 @@ exports.generateResumePdf = (req,res) =>{
     var document = {
         html: html,
         data: resume,
-        path: "./public/" + filePath,
+        path: "./pdfUpload/" + filePath,
     };
     resumeModule.findById({_id:id})
     .then(resumepdf=>{
@@ -166,7 +166,7 @@ exports.generateResumePdf = (req,res) =>{
     })
 }
 else{
-    fs.unlink("./public/pdf/"+resumepdf.pdf+ ".pdf", (err) => {
+    fs.unlink("./pdfUpload/pdf/"+resumepdf.pdf+ ".pdf", (err) => {
         if (err) {
             console.log("failed to delete local image:"+err);
         } else {
@@ -212,5 +212,5 @@ else{
 }
 
 exports.downloadResumePdf = (req,res) =>{
-    return res.download(`./public/uploads/pdf/${req.params.filename}.pdf`)
+    return res.download(`./pdfUpload/pdf/${req.params.filename}.pdf`)
 }
