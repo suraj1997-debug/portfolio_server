@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const { addProject, getProjects, getprojectBySlug } = require('./controller/project');
+const { addProject, getProjects, getprojectBySlug, getProjectsByCategoriesSlug } = require('./controller/project');
 const { adminMiddleware, checkAuth,upload } = require('./middleware/auth');
 const router = express.Router();
 
@@ -13,6 +13,8 @@ router.post('/admin/project/create',checkAuth,adminMiddleware,upload.fields([
 router.get('/project/display',getProjects);
 
 router.get('/getprojectBySlug/:slug',getprojectBySlug);
+
+router.get('/getProjectsByCategoriesSlug/:slug',getProjectsByCategoriesSlug);
 
 module.exports = router;
 

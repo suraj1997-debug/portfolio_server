@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 var projectModule = require('../../modules/project');
+const projectCatModule = require('../../modules/projectCategory');
 const slugify = require('slugify');
 const shortid = require('shortid');
 const env = require('dotenv');
@@ -157,4 +158,30 @@ exports.getprojectBySlug=(req,res)=>{
             error:error
         })
     })
+}
+
+exports.getProjectsByCategoriesSlug = (req,res) => {
+    const {slug} = req.params;
+    projectCatModule.findOne({slug:slug})
+    .then(data => {
+        console.log('====>data category',data);
+        projectModule.find({category: data?._id})
+        .then(data=>{
+            res.status(200).json({
+                message:"Projects Founded Successfully",
+                projects:data
+            })
+        })
+        .catch(error=>{
+            res.status(400).json({
+                error:error
+            })
+        })
+    })
+    .catch(error=>{
+        res.status(400).json({
+            error:error
+        })
+    })
+    
 }

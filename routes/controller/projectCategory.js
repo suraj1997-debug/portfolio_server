@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const projectCatModule = require('../../modules/projectCategory');
+const projectModule = require('../../modules/project');
 const slugify = require('slugify');
 const shortid = require('shortid');
 
@@ -28,12 +29,9 @@ exports.addcat = (req,res)=>{
 
 exports.getProjectCategories = (req,res)=>{
     
-    const getCategories=projectCatModule.find({})
-    
-    getCategories.exec()
+    projectCatModule.find({})
+    .sort({createdAt:1})
     .then(categories=>{
-
-
         res.status(200).json({
             categories:categories
         })
@@ -84,6 +82,46 @@ exports.deleteCat = (req,res) =>{
     })
 }
 
+exports.getProjectCategoryBySlug = (req,res) => {
+   const {slug} = req.params;
+ 
+    projectCatModule.findOne({slug:slug})
+    .then(category=>{
+        res.status(200).json({
+            category:category
+        })
+    })
+    .catch(err=>{
+        res.status(400).json({
+            error:err
+        })
+    })
+}
+
+exports.getProjectCategoryByProjectSlug = (req,res) => {
+    const {slug} = req.params;
+ 
+    projectModule.findOne({slug:slug})
+    .then(data=>{
+        projectCatModule.findOne({_id:data.category})
+        .then(category=>{
+            res.status(200).json({
+                category:category
+            })
+        })
+        .catch(err=>{
+            res.status(400).json({
+                error:err
+            })
+        })
+    })
+    .catch(err=>{
+        res.status(400).json({
+            error:err
+        })
+    })
+}
+ 
 
 
 

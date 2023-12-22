@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const { addcat, getProjectCategories, updateCat, deleteCat } = require('./controller/projectCategory');
+const { addcat, getProjectCategories, updateCat, deleteCat, getProjectCategoryBySlug, getProjectCategoryByProjectSlug } = require('./controller/projectCategory');
 const { checkAuth, adminMiddleware } = require('./middleware/auth');
 const router = express.Router();
 
@@ -11,5 +11,11 @@ router.get('/admin/project/get-categories',checkAuth,adminMiddleware,getProjectC
 router.post('/admin/project/update-category',checkAuth,adminMiddleware,updateCat);
 
 router.post('/admin/project/delete-category',checkAuth,adminMiddleware,deleteCat);
+
+router.get('/project/get-categories',getProjectCategories);
+
+router.get('/getProjectCategoryBySlug/:slug',getProjectCategoryBySlug);
+
+router.get('/getProjectCategoryByProjectSlug/:slug',getProjectCategoryByProjectSlug);
 
 module.exports = router;
